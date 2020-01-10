@@ -3,7 +3,7 @@ use std::io::{BufRead, BufReader, Lines};
 
 use std::io;
 
-mod day;
+mod days;
 
 
 
@@ -18,7 +18,7 @@ fn main() {
 
         /* Check exit options */
         let result = match line.trim() {
-            "1" => day::compute_day_1(load_data_file("inputs/1.txt")),
+            "1" => days::compute_day_1(load_data_file("inputs/1.txt")),
             "exit" | "q" => break,
             _ => continue,
         };
