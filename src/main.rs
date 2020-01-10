@@ -5,10 +5,7 @@ use std::io;
 
 mod days;
 
-
-
 fn main() {
-    
     loop {
         println!("Select day: ");
         let mut line = String::new();
@@ -18,7 +15,7 @@ fn main() {
 
         /* Check exit options */
         match line.trim() {
-            "1" => days::compute_day_1(load_data_file("inputs/1.txt")),
+            "1" => days::solve_day_1(load_data_file("inputs/1.txt")),
             "exit" | "q" => break,
             _ => continue,
         };

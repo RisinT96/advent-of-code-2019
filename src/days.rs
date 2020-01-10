@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{BufReader, Lines};
 
-pub fn compute_day_1(data: Lines<BufReader<File>>) {
+pub fn solve_day_1(data: Lines<BufReader<File>>) {
     fn compute_fuel(mass: u32) -> u32 {
         use std::cmp::max;
 
