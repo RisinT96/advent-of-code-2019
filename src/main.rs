@@ -17,13 +17,11 @@ fn main() {
             .expect("Failed to read line!");
 
         /* Check exit options */
-        let result = match line.trim() {
+        match line.trim() {
             "1" => days::compute_day_1(load_data_file("inputs/1.txt")),
             "exit" | "q" => break,
             _ => continue,
         };
-
-        println!("{}",result)
     }
 }
 
