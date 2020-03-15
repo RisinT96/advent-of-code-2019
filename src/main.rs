@@ -16,6 +16,7 @@ fn main() {
         /* Check exit options */
         match line.trim() {
             "1" => days::solve_day_1(load_data_file("inputs/1.txt")),
+            "2" => days::solve_day_2(load_data_file("inputs/2.txt")),
             "exit" | "q" => break,
             _ => continue,
         };
