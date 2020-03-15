@@ -76,7 +76,7 @@ fn to_instruction(vec: &Vec<u32>) -> (Instruction, usize) {
 
 pub fn solve_day_2(data: Lines<BufReader<File>>) {
     // Turn input strings into a vector of integers.
-    let mut data_vec: Vec<u32> = Vec::new();
+    let mut data_vec_orig: Vec<u32> = Vec::new();
     for line in data {
         let mut line_vec: Vec<u32> = line
             .unwrap()
@@ -84,32 +84,36 @@ pub fn solve_day_2(data: Lines<BufReader<File>>) {
             .map(|s| s.parse::<u32>().unwrap())
             .collect();
 
-        data_vec.append(&mut line_vec);
+        data_vec_orig.append(&mut line_vec);
     }
 
-    // Set machine to initial state
-    data_vec[1] = 12;
-    data_vec[2] = 2;
-
-    let mut pc = 0;
-
-    // Iterate over all ops
-    loop {
-        let (inst, adv) = to_instruction(&data_vec[pc..].to_vec());
-
-        match inst.opcode {
-            Opcode::OpcodeHalt => {
-                println!("Value at position 0: {}", data_vec[0]);
-                break;
-            }
-            Opcode::OpcodeAdd => {
-                data_vec[inst.output] = data_vec[inst.input1] + data_vec[inst.input2]
-            }
-            Opcode::OpcodeMult => {
-                data_vec[inst.output] = data_vec[inst.input1] * data_vec[inst.input2]
+    for noun in 0..99 {
+        for verb in 0..99 {
+            let mut data_vec = data_vec_orig.clone();
+            // Set machine to initial state
+            data_vec[1] = noun;
+            data_vec[2] = verb;
+            let mut pc = 0;
+            // Iterate over all ops
+            loop {
+                let (inst, adv) = to_instruction(&data_vec[pc..].to_vec());
+                match inst.opcode {
+                    Opcode::OpcodeHalt => {
+                        if data_vec[0] == 19690720 {
+                            println!("Noun {noun}, Verb {verb}", noun = noun, verb = verb);
+                            return;
+                        }
+                        break;
+                    }
+                    Opcode::OpcodeAdd => {
+                        data_vec[inst.output] = data_vec[inst.input1] + data_vec[inst.input2]
+                    }
+                    Opcode::OpcodeMult => {
+                        data_vec[inst.output] = data_vec[inst.input1] * data_vec[inst.input2]
+                    }
+                }
+                pc += adv;
             }
         }
-
-        pc += adv;
     }
 }
